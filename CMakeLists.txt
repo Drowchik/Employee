@@ -15,7 +15,7 @@ if(MSVC)
 endif()
 
 # Объявляем библиотеку
-add_library(Employee SHARED "include/Employee/Employee.h" "src/Employee.cc")
+add_library(Employee SHARED "include/Employee/Employee.h" "src/Employee.cc" "src/Employee_list.cc")
 target_include_directories(Employee PUBLIC "include")
 
 include(FetchContent)

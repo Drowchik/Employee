@@ -29,22 +29,25 @@ namespace Employee {
 			int get_month() const;
 			int get_year() const;
 			int get_salary() const;
+			//добавить парт тайм сами функции
 			
-			int Payroll_calculation(int _day) const;
+			int Payroll_calculation() const;
 
 
 	};
-	/* class PartTime {
-	private:
-		std::string _Name;
-		std::string _SurName;
-		std::string _Patronymic;
-		int _day;
-		int _month;
-		int _year;
-		int _salary_hour;
-		int _add_salary;
-		int _hours;
-		PartTime(Type type, std::string Name, std::string SurName, int day, int month, int year, int _salary_hour, int _add_salary, int _hours);
-	};*/
+
+	class EmployeeList {
+		public:
+			static const int CAPACITY = 10;
+		private:
+			FullTime _Worker[CAPACITY];
+			int _size;
+		public:
+			EmployeeList();
+			int size() const;
+			FullTime operator[](int index) const;
+			void add(FullTime f);
+			//инсерт, ремове
+	};
+
 }

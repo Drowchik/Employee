@@ -49,9 +49,9 @@ int FullTime::Payroll_calculation() const {
 	int countwork = (countday - countdaywork) / (365);
 	for (int i = 0; i <= countwork; i++)
 	{
-		
+		_salary = _salary * 1.05;
 	}
-
+	return salary;
 }
 //возможно на подобии тут делаем парт тайм
 
