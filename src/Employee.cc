@@ -8,36 +8,56 @@
 using namespace Employee;
 using namespace std;
 
-FullTime FullTime::create_FullTime(string Name, string SurName, string Patronymic, int day, int month, int year, int salary) {
-	return FullTime(Type::FullTime, Name, SurName, Patronymic, day, month, year, salary);
+WorkTime WorkTime::create_FullTime(string _Name, string SurName, string Patronymic, int day, int month, int year, float salary) {
+	return WorkTime(Type::FullTime, _Name, SurName, Patronymic, day, month, year, salary);
 }
-//просто данные вносим
-Type FullTime::get_type() const {
-	return _type;
-}
-string FullTime::get_name() const {
-	return _Name;
-}
-string FullTime::get_surname() const {
-	return _SurName;
-}
-string FullTime::get_patronymic() const {
-	return _Patronymic;
-}
-int FullTime::get_day() const {
-	return _day;
-}
-int FullTime::get_month() const {
-	return _month;
-}
-int FullTime::get_year() const {
-	return _year;
-}
-int FullTime::get_salary() const {
-	return _salary;
+WorkTime WorkTime::create_PartTime(string Name, string SurName, string Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours) {
+	return WorkTime(Type::PartTime, Name, SurName, Patronymic, day, month, year, _salary_hour, _add_salary, _hours);
 }
 
-int FullTime::Payroll_calculation() const {
+WorkTime::WorkTime() : _type(Type::FullTime), _Name("Денис"), _SurName("Сергеев"), _Patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary(54000){}
+WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float salary){}
+
+WorkTime::WorkTime() : _type(Type::FullTime), _Name("Денис"), _SurName("Сергеев"), _Patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary_hour(400), _add_salary(5), _hours(80) {}
+WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float _salary_hour, const int _add_salary, const int _hours) {}
+
+
+Type WorkTime::get_type() const {
+	return _type;
+}
+string WorkTime::get_name() const {
+	return _Name;
+}
+string WorkTime::get_surname() const {
+	return _SurName;
+}
+string WorkTime::get_patronymic() const {
+	return _Patronymic;
+}
+int WorkTime::get_day() const {
+	return _day;
+}
+int WorkTime::get_month() const {
+	return _month;
+}
+int WorkTime::get_year() const {
+	return _year;
+}
+float WorkTime::get_salary() {
+	return _salary;
+}
+float WorkTime::get_salary_hour() {
+	return _salary_hour;
+}
+int WorkTime::get_add_salary() {
+	return _add_salary;
+}
+int WorkTime::get_hours()
+{
+	return _hours;
+}
+
+int WorkTime::Payroll_calculation() {
 	time_t t;
 	time(&t);
 
@@ -51,7 +71,7 @@ int FullTime::Payroll_calculation() const {
 	{
 		_salary = _salary * 1.05;
 	}
-	return salary;
+	return _salary;
 }
 //возможно на подобии тут делаем парт тайм
 

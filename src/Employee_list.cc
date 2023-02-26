@@ -10,14 +10,14 @@ int EmployeeList::size() const {
 	return _size;
 }
 
-FullTime EmployeeList :: operator[](const int index) const {
+WorkTime EmployeeList :: operator[](const int index) const {
 	if (index < 0 || _size <= index)
 	{
 		throw out_of_range("[FunctionList::operator[]] Index is out of range.");
 	}
 	return _Worker[index];
  }
-void EmployeeList::add(const FullTime f) {
+void EmployeeList::add(const WorkTime f) {
 	if (_size == CAPACITY) {
 		throw runtime_error("[FunctionList::add] Capacity is reached.");
 	}
