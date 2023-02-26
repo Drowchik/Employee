@@ -37,13 +37,20 @@ int FullTime::get_salary() const {
 	return _salary;
 }
 
-int FullTime::Payroll_calculation()const {
+int FullTime::Payroll_calculation() const {
 	time_t t;
 	time(&t);
 
 	int nowday = localtime(&t)->tm_mday;
-	int nowmoonth = localtime(&t)->tm_mon;
+	int nowmonth = localtime(&t)->tm_mon;
 	int nowyear = localtime(&t)->tm_year + 1900;
+	double countday = ((nowyear * 12) + nowmonth * 30.42) + nowday;
+	double countdaywork = ((_year * 12) + _month * 30.42) + _day;
+	int countwork = (countday - countdaywork) / (365);
+	for (int i = 0; i <= countwork; i++)
+	{
+		
+	}
 
 }
 //возможно на подобии тут делаем парт тайм

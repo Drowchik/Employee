@@ -30,7 +30,7 @@ namespace Employee {
 			int get_year() const;
 			int get_salary() const;
 			
-			int Payroll_calculation() const;
+			int Payroll_calculation(int _day) const;
 
 
 	};
