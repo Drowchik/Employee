@@ -22,7 +22,8 @@ TEST(EmployeeTests, Getting_res_part_time) {
 TEST(EmployeeTests, Getting_res_part_time2) {
     WorkTime worker1 = WorkTime::create_PartTime("Денис", "Сергеев", "Андреевич", 13, 12, 2013, 700, 3, 40);
     float res = worker1.Getting_res();
-    EXPECT_EQ(res, 28840);
+    EXPECT_EQ(res, 28840); 
+
 }
 TEST(EmployeeTests, Getting_res_full_time3) {
     WorkTime worker1 = WorkTime::create_FullTime("Денис", "Сергеев", "Андреевич", 7, 9, 1955, 37777);
