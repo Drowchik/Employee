@@ -2,26 +2,11 @@
 
 #include <Employee/Employee.h>
 
-TEST(FunctionsTests, SumStubTest1) {
-    // Arrange
-    int lhs = 2;
-    int rhs = 3;
+using namespace Employee;
 
-    // Act
-    int r = sum_stub(lhs, rhs);
-
-    // Assert
-    EXPECT_EQ(r, 5);
+TEST(EmployeeTests, Getting_res1) {
+    static auto worker1 = WorkTime::create_FullTime("Денис", "Сергеев", "Андреевич", 13, 12, 2003, 54000);
+    float res = worker1.Getting_res();
+    EXPECT_EQ(res, 124512);
 }
 
-TEST(FunctionsTests, SumStubTest2) {
-    // Arrange
-    int lhs = -1;
-    int rhs = 3;
-
-    // Act
-    int r = sum_stub(lhs, rhs);
-
-    // Assert
-    EXPECT_EQ(r, 2);
-}

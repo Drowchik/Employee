@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+//возможно убрать строки
 namespace Employee {
 	enum class Type {
 		FullTime,
@@ -34,13 +34,15 @@ namespace Employee {
 			int get_month() const;
 			int get_year() const;
 			float get_salary();
+			float set_salary();
 			float get_salary_hour();
 			int get_add_salary();
 			int get_hours();
-			//добавить парт тайм сами функции
 			
-			int Payroll_calculation();
-
+			
+			float Payroll_calculation();
+			float Payroll_parttime();
+			float Getting_res();
 
 	};
 
@@ -55,7 +57,9 @@ namespace Employee {
 			int size() const;
 			WorkTime operator[](int index) const;
 			void add(WorkTime f);
+			//insert(int index, WorkTime f);
+			void remove (int index);
 			//инсерт, ремове
 	};
-
+	int search_max_salary(const EmployeeList& _Worker);
 }
