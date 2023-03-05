@@ -28,6 +28,35 @@ void EmployeeList::remove(int index)
 {
 	_size = 0;
 }
+void EmployeeList::deletePerson(int index)
+{
+	if (index < 0 || _size <= index)
+	{
+		throw out_of_range("[FunctionList::operator[]] Index is out of range.");
+	}
+	WorkTime people;
+	_Worker[index] = people;
+	for (int i = index; i != CAPACITY-1; i++)
+	{
+		_Worker[i] = _Worker[i + 1];
+	}
+	_size--;
+}	
+void EmployeeList::insertPerson(WorkTime people, int index)
+{
+	if (index < 0 || _size <= index)
+	{
+		throw out_of_range("[FunctionList::operator[]] Index is out of range.");
+	}
+	else {
+		for (int i = _size - 1; i != index; i--)
+		{
+			_Worker[i + 1] = _Worker[i];
+		}
+	}
+	_Worker[index] = people;
+	_size++;
+}
 int search_max_salary(const EmployeeList& _Worker)
 {
 	int max_index = -1;

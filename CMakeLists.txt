@@ -24,6 +24,5 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Объявляем тесты
-add_executable(Employee_tests "tests/Employee_tests.cc")
+add_executable(Employee_tests "tests/Employee_tests.cc" "tests/Employee_lists_tests.cc")
 target_link_libraries(Employee_tests Employee GTest::gtest_main)
-

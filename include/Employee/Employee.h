@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-//возможно убрать строки
+
 namespace Employee {
-	enum class Type {
+	enum Type {
 		FullTime,
 		PartTime
 	};
@@ -21,7 +21,6 @@ namespace Employee {
 			int _hours;
 			WorkTime(Type type, std::string Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float salary);
 			WorkTime(Type type, std::string Name, std::string SurName, std::string _Patronymic, int _day, int _month, int _year, float _salary_hour, int _add_salary, int _hours);
-
 		public:
 			static WorkTime create_FullTime(std::string _Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float salary);
 			static WorkTime create_PartTime(std::string Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours);
@@ -34,32 +33,32 @@ namespace Employee {
 			int get_month() const;
 			int get_year() const;
 			float get_salary();
-			float set_salary();
 			float get_salary_hour();
 			int get_add_salary();
 			int get_hours();
 			
 			
-			float Payroll_calculation();
-			float Payroll_parttime();
-			float Getting_res();
+			double Payroll_calculation();
+			double Payroll_parttime();
+			double Getting_res();
 
 	};
 
 	class EmployeeList {
 		public:
 			static const int CAPACITY = 10;
-		private:
-			WorkTime _Worker[CAPACITY];
-			int _size;
-		public:
 			EmployeeList();
 			int size() const;
 			WorkTime operator[](int index) const;
 			void add(WorkTime f);
+			void deletePerson(int index);
+			void insertPerson(WorkTime people, int index);
 			//insert(int index, WorkTime f);
 			void remove (int index);
 			//инсерт, ремове
+	private:
+		WorkTime _Worker[CAPACITY];
+		int _size;
 	};
 	int search_max_salary(const EmployeeList& _Worker);
 }

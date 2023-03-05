@@ -15,12 +15,31 @@ WorkTime WorkTime::create_PartTime(string Name, string SurName, string Patronymi
 	return WorkTime(Type::PartTime, Name, SurName, Patronymic, day, month, year, _salary_hour, _add_salary, _hours);
 }
 
-WorkTime::WorkTime() : _type(Type::FullTime), _Name("Денис"), _SurName("Сергеев"), _Patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary(54000){}
-WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float salary){}
+WorkTime::WorkTime() : _type(Type::FullTime), _Name ("Денис"), _SurName("Сергеев"), _Patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary(54000){}
+WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float salary)
+{
+	_type = type; 
+	_Name = Name;
+	_SurName = SurName;
+	_Patronymic = Patronymic;
+	_day = day;
+	_month = month;
+	_year = year;
+	_salary=salary;
+}
+WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float salary_hour, const int add_salary, const int hours) {
+	_type = type;
+	_Name = Name;
+	_SurName = SurName;
+	_Patronymic = Patronymic;
+	_day = day;
+	_month = month;
+	_year = year;
+	_salary_hour = salary_hour;
+	_add_salary = add_salary;
+	_hours = hours;
 
-WorkTime::WorkTime() : _type(Type::PartTime), _Name("Денис"), _SurName("Сергеев"), _Patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary_hour(400), _add_salary(5), _hours(80) {}
-WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float _salary_hour, const int _add_salary, const int _hours) {}
-
+}
 
 Type WorkTime::get_type() const {
 	return _type;
@@ -46,11 +65,6 @@ int WorkTime::get_year() const {
 float WorkTime::get_salary() {
 	return _salary;
 }
-float WorkTime::set_salary()
-{
-	float salaryItog = _salary;
-	return salaryItog;
-}
 float WorkTime::get_salary_hour() {
 	return _salary_hour;
 }
@@ -63,7 +77,7 @@ int WorkTime::get_hours()
 }
 
 
-float WorkTime::Payroll_calculation() {
+double WorkTime::Payroll_calculation() {
 	//википедия Юлианская_дата
 	//сделать обработку ошибки, если сюда херню передал
 	//сделаю пока войдовой, потом на тестах проверю, если что сделать флот и вернуть зарплату
@@ -81,15 +95,15 @@ float WorkTime::Payroll_calculation() {
 	int m = nowmonth + 12 * a - 3;
 	int jdn = nowday + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
 	int res = jdn - jdn1;
-	float res_salary= _salary * (1 + 0.005 * (res / 365));
+	double res_salary= _salary * (1 + 0.005 * (res / 365));
 	return res_salary;
 }
-float WorkTime::Payroll_parttime()
+double WorkTime::Payroll_parttime()
 {
-	float res_salary = _salary_hour * _hours * (1 + _add_salary * 1.0 / 100);
+	double res_salary = _salary_hour * _hours * (1 + _add_salary * 1.0 / 100);
 	return res_salary;
 }
-float WorkTime::Getting_res()
+double WorkTime::Getting_res()
 {
 	switch (_type)
 	{
