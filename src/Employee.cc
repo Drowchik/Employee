@@ -5,23 +5,23 @@
 #include <stdexcept>
 #include <ctime>
 
-using namespace Employee;
+using namespace employee;
 using namespace std;
 
-WorkTime WorkTime::create_FullTime(string _Name, string SurName, string Patronymic, int day, int month, int year, float salary) {
+WorkTime WorkTime::create_full_time(string _Name, string SurName, string Patronymic, int day, int month, int year, float salary) {
 	return WorkTime(Type::FullTime, _Name, SurName, Patronymic, day, month, year, salary);
 }
-WorkTime WorkTime::create_PartTime(string Name, string SurName, string Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours) {
+WorkTime WorkTime::create_part_time(string Name, string SurName, string Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours) {
 	return WorkTime(Type::PartTime, Name, SurName, Patronymic, day, month, year, _salary_hour, _add_salary, _hours);
 }
 
-WorkTime::WorkTime() : _type(Type::FullTime), _Name ("Денис"), _SurName("Сергеев"), _Patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary(54000){}
+WorkTime::WorkTime() : _type(Type::FullTime), _name ("Денис"), _surname("Сергеев"), _patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary(54000){}
 WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float salary)
 {
 	_type = type; 
-	_Name = Name;
-	_SurName = SurName;
-	_Patronymic = Patronymic;
+	_name = Name;
+	_surname = SurName;
+	_patronymic = Patronymic;
 	_day = day;
 	_month = month;
 	_year = year;
@@ -29,9 +29,9 @@ WorkTime::WorkTime(const Type type, const string Name, const string SurName, con
 }
 WorkTime::WorkTime(const Type type, const string Name, const string SurName, const string Patronymic, const int day, const int month, const int year, float salary_hour, const int add_salary, const int hours) {
 	_type = type;
-	_Name = Name;
-	_SurName = SurName;
-	_Patronymic = Patronymic;
+	_name = Name;
+	_surname = SurName;
+	_patronymic = Patronymic;
 	_day = day;
 	_month = month;
 	_year = year;
@@ -45,13 +45,13 @@ Type WorkTime::get_type() const {
 	return _type;
 }
 string WorkTime::get_name() const {
-	return _Name;
+	return _name;
 }
 string WorkTime::get_surname() const {
-	return _SurName;
+	return _surname;
 }
 string WorkTime::get_patronymic() const {
-	return _Patronymic;
+	return _patronymic;
 }
 int WorkTime::get_day() const {
 	return _day;
@@ -75,12 +75,14 @@ int WorkTime::get_hours()
 {
 	return _hours;
 }
+void WorkTime::set_add_salary(int add_salary)
+{
+	_add_salary = add_salary;
+}
 
 
-double WorkTime::Payroll_calculation() {
+double WorkTime::payroll_calculation() {
 	//википедия Юлианская_дата
-	//сделать обработку ошибки, если сюда херню передал
-	//сделаю пока войдовой, потом на тестах проверю, если что сделать флот и вернуть зарплату
 	time_t t;
 	time(&t);
 	int a1 = (14 - _month) / 12;
@@ -98,19 +100,19 @@ double WorkTime::Payroll_calculation() {
 	double res_salary= _salary * (1 + 0.005 * (res / 365));
 	return res_salary;
 }
-double WorkTime::Payroll_parttime()
+double WorkTime::payroll_parttime()
 {
 	double res_salary = _salary_hour * _hours * (1 + _add_salary * 1.0 / 100);
 	return res_salary;
 }
-double WorkTime::Getting_res()
+double WorkTime::getting_res()
 {
 	switch (_type)
 	{
 	case::Type::FullTime:
-		return Payroll_calculation();
+		return payroll_calculation();
 	case::Type::PartTime:
-		return Payroll_parttime();
+		return payroll_parttime();
 	default:
 		throw runtime_error("[Function::compute_derivative] Invalid function type.");
 	}

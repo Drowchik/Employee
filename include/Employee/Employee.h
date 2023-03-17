@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-
-namespace Employee {
+//можно добавить стаж в отдельную переменную
+namespace employee {
 	enum Type {
 		FullTime,
 		PartTime
@@ -9,9 +9,9 @@ namespace Employee {
 	class WorkTime {
 		private:
 			Type _type;
-			std::string _Name;
-			std::string _SurName;
-			std::string _Patronymic;
+			std::string _name;
+			std::string _surname;
+			std::string _patronymic;
 			int _day;
 			int _month;
 			int _year;
@@ -22,8 +22,8 @@ namespace Employee {
 			WorkTime(Type type, std::string Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float salary);
 			WorkTime(Type type, std::string Name, std::string SurName, std::string _Patronymic, int _day, int _month, int _year, float _salary_hour, int _add_salary, int _hours);
 		public:
-			static WorkTime create_FullTime(std::string _Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float salary);
-			static WorkTime create_PartTime(std::string Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours);
+			static WorkTime create_full_time(std::string _Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float salary);
+			static WorkTime create_part_time(std::string Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours);
 			WorkTime();
 			Type get_type() const;
 			std::string get_name() const;
@@ -36,11 +36,12 @@ namespace Employee {
 			float get_salary_hour();
 			int get_add_salary();
 			int get_hours();
+			void set_add_salary(int _add_salary);
 			
 			
-			double Payroll_calculation();
-			double Payroll_parttime();
-			double Getting_res();
+			double payroll_calculation();
+			double payroll_parttime();
+			double getting_res();
 
 	};
 
@@ -51,11 +52,9 @@ namespace Employee {
 			int size() const;
 			WorkTime operator[](int index) const;
 			void add(WorkTime f);
-			void deletePerson(int index);
-			void insertPerson(WorkTime people, int index);
-			//insert(int index, WorkTime f);
+			void delete_person(int index);
+			void insert_person(WorkTime people, int index);
 			void remove (int index);
-			//инсерт, ремове
 	private:
 		WorkTime _Worker[CAPACITY];
 		int _size;
