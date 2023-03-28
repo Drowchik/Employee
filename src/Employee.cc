@@ -1,5 +1,5 @@
 #include <Employee/Employee.h>
-
+#include<iostream>
 #include <cassert>
 #include <cmath>
 #include <stdexcept>
@@ -8,11 +8,11 @@
 using namespace employee;
 using namespace std;
 
-WorkTime WorkTime::create_full_time(string _Name, string SurName, string Patronymic, int day, int month, int year, float salary) {
-	return WorkTime(Type::FullTime, _Name, SurName, Patronymic, day, month, year, salary);
+WorkTimePtr WorkTime::create_full_time(string _Name, string SurName, string Patronymic, int day, int month, int year, float salary) {
+	return new WorkTime(Type::FullTime, _Name, SurName, Patronymic, day, month, year, salary);
 }
-WorkTime WorkTime::create_part_time(string Name, string SurName, string Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours) {
-	return WorkTime(Type::PartTime, Name, SurName, Patronymic, day, month, year, _salary_hour, _add_salary, _hours);
+WorkTimePtr WorkTime::create_part_time(string Name, string SurName, string Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours) {
+	return new WorkTime(Type::PartTime, Name, SurName, Patronymic, day, month, year, _salary_hour, _add_salary, _hours);
 }
 
 WorkTime::WorkTime() : _type(Type::FullTime), _name ("Денис"), _surname("Сергеев"), _patronymic("Андреевич"), _day(13), _month(12), _year(2003), _salary(54000){}
@@ -40,6 +40,24 @@ WorkTime::WorkTime(const Type type, const string Name, const string SurName, con
 	_hours = hours;
 
 }
+ostream& operator<<(std::ostream& stream, const WorkTime& people) {
+	
+	switch (people.get_type())
+	{
+	case::Type::FullTime:
+		stream << people.get_type() << people.get_name() << people.get_surname() << people.get_patronymic() << people.get_day()
+			<< people.get_month() << people.get_year() << people.get_salary();
+		return stream;
+	case::Type::PartTime:
+		stream << people.get_type() << people.get_name() << people.get_surname() << people.get_patronymic() << people.get_day()
+			<< people.get_month() << people.get_year() << people.get_salary_hour() << people.get_add_salary() << people.get_hours();
+		return stream;
+	default:
+		throw runtime_error("[Function::compute_derivative] Invalid function type.");
+	}
+	
+	
+}
 
 Type WorkTime::get_type() const {
 	return _type;
@@ -62,22 +80,18 @@ int WorkTime::get_month() const {
 int WorkTime::get_year() const {
 	return _year;
 }
-float WorkTime::get_salary() {
+float WorkTime::get_salary()const {
 	return _salary;
 }
-float WorkTime::get_salary_hour() {
+float WorkTime::get_salary_hour()const {
 	return _salary_hour;
 }
-int WorkTime::get_add_salary() {
+int WorkTime::get_add_salary()const {
 	return _add_salary;
 }
-int WorkTime::get_hours()
+int WorkTime::get_hours()const
 {
 	return _hours;
-}
-void WorkTime::set_add_salary(int add_salary)
-{
-	_add_salary = add_salary;
 }
 
 
@@ -117,5 +131,15 @@ double WorkTime::getting_res()
 		throw runtime_error("[Function::compute_derivative] Invalid function type.");
 	}
 }
-//возможно на подобии тут делаем парт тайм
-
+WorkTimePtr WorkTime::clone() const
+{
+	switch (_type)
+	{
+	case::Type::FullTime:
+		return new WorkTime(_type, _name, _surname, _patronymic, _day, _month, _year, _salary);
+	case::Type::PartTime:
+		return new WorkTime(_type, _name, _surname, _patronymic, _day, _month, _year, _salary_hour, _add_salary, _hours);
+	default:
+		throw runtime_error("[Function::compute_derivative] Invalid function type.");
+	}
+}
