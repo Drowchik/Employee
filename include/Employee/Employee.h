@@ -9,6 +9,7 @@ namespace employee {
 	};
 	class WorkTime;
 	using WorkTimePtr = WorkTime*;
+	std::ostream& operator<<(std::ostream& stream, const WorkTimePtr& people);
 	class WorkTime {
 		private:
 			Type _type;
@@ -29,7 +30,6 @@ namespace employee {
 			static WorkTimePtr create_full_time(std::string _Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float salary);
 			static WorkTimePtr create_part_time(std::string Name, std::string SurName, std::string _Patronymic, int day, int month, int year, float _salary_hour, int _add_salary, int _hours);
 			WorkTime();
-			friend std::ostream& operator<<(std::ostream& stream, const WorkTime& people);
 			Type get_type() const;
 			std::string get_name() const;
 			std::string get_surname() const;
@@ -42,17 +42,18 @@ namespace employee {
 			int get_add_salary() const;
 			int get_hours() const;
 			WorkTimePtr clone() const;
-			/* Type set_type(Type type);
-			std::string set_name(std::string name);
-			std::string set_surname(std::string surname);
-			std::string set_patronymic(std::string patronymic);
-			int set_day(int day);
-			int set_month(int month);
-			int set_year(int year);
-			float set_salary(float salary);
-			float set_salary_hour(float slary_hour);
-			int set_add_salary(int add_salary);
-			int set_hours(int hours);*/
+			
+			void set_type(Type type);
+			void set_name(std::string name);
+			void set_surname(std::string surname);
+			void set_patronymic(std::string patronymic);
+			void set_day(int day);
+			void set_month(int month);
+			void set_year(int year);
+			void set_salary(float salary);
+			void set_salary_hour(float slary_hour);
+			void set_add_salary(int add_salary);
+			void set_hours(int hours);
 			
 			
 			double payroll_calculation();

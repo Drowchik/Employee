@@ -97,6 +97,22 @@ void EmployeeList::insert_person(WorkTimePtr people, int index)
 	_ptr = copy;
 	_size++;
 }
+std::ostream& employee::operator<<(std::ostream& stream, const WorkTimePtr& people)
+{
+	switch (people->get_type())
+	{
+	case::Type::FullTime:
+		stream << endl << "\tПолная занятость:\t" << endl<< people->get_name() << " " << people->get_surname() << " "<< people->get_patronymic() << endl<<"Дата устройвства на работу: " << people->get_day()
+			<<"." << people->get_month() <<"." << people->get_year() << endl<< "Зарплата: " << people->get_salary() << endl<<endl;
+		return stream;
+	case::Type::PartTime:
+		stream <<endl<< "\tЧастичная занятость:\t" << endl<<  people->get_name() <<" "<< people->get_surname() <<" "<< people->get_patronymic() << endl << "Дата устройвства на работу: " << people->get_day()
+			<<"."<<people->get_month() << "."<< people->get_year() << endl << "Информация о заработной плате: " << "Почасовая зарпалата" << people->get_salary_hour() <<endl << "Надбавка " << people->get_add_salary() <<"%"<< endl<<"Кол-во отработанных часов: " <<people->get_hours()<< endl << endl;
+		return stream;
+	default:
+		throw runtime_error("[Function::compute_derivative] Invalid function type.");
+	}
+}
 int employee:: search_max_salary(const EmployeeList& _Worker)
 {
 	int max_index = -1;

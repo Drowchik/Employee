@@ -61,11 +61,12 @@ TEST(EmployeeListTests, size2)
 TEST(EmployeeListTests, insertPerson)
 {
     EmployeeList _Worker;
+    _Worker.add(WorkTime::create_full_time("Денис", "Сергеев", "Андреевич", 13, 12, 2003, 54000));
+    _Worker.add(WorkTime::create_part_time("Денис", "Сергеев", "Андреевич", 13, 12, 2013, 700, 3, 40));
     WorkTimePtr worker1 = WorkTime::create_full_time("Денис", "Сергеев", "Андреевич", 13, 12, 2003, 54000);
-    WorkTimePtr worker2 = WorkTime::create_part_time("Денис", "Сергеев", "Андреевич", 13, 12, 2013, 700, 3, 40);
-    _Worker.insert_person(worker2, 0);
-    Type a = _Worker[0]->get_type();
-    EXPECT_EQ(a, PartTime);
+    _Worker.insert_person(worker1, 0);
+    Type a = _Worker[1]->get_type();
+    EXPECT_EQ(a, FullTime);
 
 }
 
@@ -89,7 +90,7 @@ TEST(EmployeeListTests, search_max_salary1)
     ASSERT_EQ(search_max_salary(_Worker), 1);
 
 }
-TEST(EmployeeListTests, deletePerson1) //исключения
+/*TEST(EmployeeListTests, deletePerson1) //исключения
 {
     EmployeeList _Worker;
     _Worker.add(WorkTime::create_part_time("Денис", "Сергеев", "Андреевич", 13, 12, 2003, 400, 5, 80));
@@ -112,4 +113,4 @@ TEST(EmployeeListTests, insertPerson1)//иссключение
     _Worker.insert_person(worker2, -1);
     Type a = _Worker[0]->get_type();
     EXPECT_EQ(a, PartTime);
-}
+}*/

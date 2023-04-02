@@ -40,24 +40,7 @@ WorkTime::WorkTime(const Type type, const string Name, const string SurName, con
 	_hours = hours;
 
 }
-ostream& operator<<(std::ostream& stream, const WorkTime& people) {
-	
-	switch (people.get_type())
-	{
-	case::Type::FullTime:
-		stream << people.get_type() << people.get_name() << people.get_surname() << people.get_patronymic() << people.get_day()
-			<< people.get_month() << people.get_year() << people.get_salary();
-		return stream;
-	case::Type::PartTime:
-		stream << people.get_type() << people.get_name() << people.get_surname() << people.get_patronymic() << people.get_day()
-			<< people.get_month() << people.get_year() << people.get_salary_hour() << people.get_add_salary() << people.get_hours();
-		return stream;
-	default:
-		throw runtime_error("[Function::compute_derivative] Invalid function type.");
-	}
-	
-	
-}
+
 
 Type WorkTime::get_type() const {
 	return _type;
@@ -93,6 +76,50 @@ int WorkTime::get_hours()const
 {
 	return _hours;
 }
+
+void WorkTime::set_type(Type type)
+{
+	_type = type;
+}
+void WorkTime::set_name(string name)
+{
+	_name = name;
+}
+void WorkTime::set_surname(string surname)
+{
+	_surname = surname;
+}
+void WorkTime::set_patronymic(string patronymic) {
+	_patronymic = patronymic;
+}
+void WorkTime::set_day(int day)
+{
+	_day = day;
+}
+void WorkTime::set_month(int month)
+{
+	_month = month;
+}
+void WorkTime::set_year(int year) {
+	_year = year;
+}
+void WorkTime::set_salary(float salary)
+{
+	_salary = salary;
+}
+void WorkTime::set_salary_hour(float slary_hour)
+{
+	_salary_hour = slary_hour;
+}
+void WorkTime::set_add_salary(int add_salary)
+{
+	_add_salary = add_salary;
+}
+void WorkTime::set_hours(int hours)
+{
+	_hours = hours;
+}
+
 
 
 double WorkTime::payroll_calculation() {
