@@ -55,7 +55,6 @@ int Menu()
 int main() {
 	setlocale(LC_ALL, "Russian");
 	EmployeeList _Worker;
-	WorkTimePtr worker1;
 	while (true)
 	{
 		int choice1 = Menu();
@@ -97,7 +96,7 @@ int main() {
 					cin >> _day >> _month >> _year;
 					cout << "¬ведите вашу зарплату: ";
 					cin >> _salary;
-					worker1 = WorkTime::create_full_time(name, _surname, _patronymic, _day, _month, _year, _salary);
+					_Worker.insert_person(make_shared<Full_time>(name, _surname, _patronymic, _day, _month, _year, _salary), index);
 					break;
 				}
 				case 2:
@@ -119,12 +118,12 @@ int main() {
 					cin >> _add_salary;
 					cout << "¬ведите кол-во рабочих часов за последний мес€ц: " << endl;
 					cin >> _hours;
-					worker1 = WorkTime::create_part_time(name, _surname, _patronymic, _day, _month, _year, _salary_hour, _add_salary, _hours);
+					_Worker.insert_person(make_shared<Part_time>(name, _surname, _patronymic, _day, _month, _year, _salary_hour, _add_salary, _hours), index);
 					break;
 
 				}
 			}	
-				_Worker.insert_person(worker1, index);
+	
 			break;
 		}
 		case 2: {
@@ -150,7 +149,7 @@ int main() {
 			}
 			for (int i = 0; i < size; i++)
 			{
-				cout << _Worker[i];
+				_Worker[i]->print();
 			}
 			break;
 		}
@@ -197,7 +196,7 @@ int main() {
 						cin >> _day >> _month >> _year;
 						cout << "¬ведите вашу зарплату: ";
 						cin >> _salary;
-						worker1 = WorkTime::create_full_time(name, _surname, _patronymic, _day, _month, _year, _salary);
+						_Worker.add(make_shared <Full_time> (name, _surname, _patronymic, _day, _month, _year, _salary));
 						break;
 					}
 					case 2:
@@ -223,12 +222,11 @@ int main() {
 						cin >> _add_salary;
 						cout << "¬ведите кол-во рабочих часов за последний мес€ц: " << endl;
 						cin >> _hours;
-						worker1 = WorkTime::create_part_time(name, _surname, _patronymic, _day, _month, _year, _salary_hour, _add_salary, _hours);
+						_Worker.add(make_shared<Part_time>(name, _surname, _patronymic, _day, _month, _year, _salary_hour, _add_salary, _hours));
 						break;
 
 					}
 				}
-				_Worker.add(worker1);
 				break;
 		}
 			case 6: 
